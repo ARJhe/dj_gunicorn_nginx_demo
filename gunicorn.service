@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/demo
+ExecStart=/home/ubuntu/venv/bin/gunicorn --bind unix:/run/gunicorn.sock demo.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
